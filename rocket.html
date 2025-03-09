@@ -146,15 +146,25 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(2, 1fr); /* Creates two columns */
+            grid-template-rows: repeat(2, auto);  /* Creates two rows */
+            gap: 40px; /* Adds spacing between the cards */
+            justify-content: center;
+            align-items: center;
         }
         
         .service-card {
             background-color: #111;
             padding: 30px;
-            border-radius: 5px;
+            border-radius: 10px; /* Slightly rounded corners */ /* Border for a clear rectangle */
+            box-shadow: 0px 4px 10px rgb(12, 12, 12); /* Light shadow effect */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-width: 250px; /* Ensures uniform size */
         }
+        
         
         .service-card h3 {
             font-size: 24px;
@@ -258,9 +268,10 @@
             opacity: 0.7;
         }
         /* Services Section (from Image 1) */
+        /* Services Section (from Image 1) */
     .services-section {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         min-height: 80vh;
       }
       
@@ -272,16 +283,44 @@
         border-right: 1px solid #222;
         overflow: hidden;
         cursor: pointer;
+        transition: background-color 0.3s ease;
       }
       
       .service-card:last-child {
         border-right: none;
       }
       
+      .service-card:hover {
+        background-color: #f5eded;
+      }
+      
       .service-title {
         font-size: clamp(2rem, 5vw, 4rem);
         font-weight: bold;
         transition: transform 0.3s ease;
+        position: relative;
+        z-index: 2;
+      }
+      
+      .service-card:hover .service-title {
+        transform: translateY(-10px);
+        color: #c0ff00;
+      }
+      
+      .service-description {
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+        font-size: 1rem;
+        color: #aaa;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      
+      .service-card:hover .service-description {
+        opacity: 1;
+        transform: translateY(0);
       }
       
       .arrow-circle {
@@ -297,18 +336,14 @@
         transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
       }
       
-      .service-card:hover .service-title {
-        transform: translateX(-10px);
-      }
-      
       .service-card:hover .arrow-circle {
         transform: translateX(10px);
-        background-color: white;
-        border-color: white;
+        background-color: #c0ff00;
+        border-color: #c0ff00;
       }
       
       .service-card:hover .arrow-circle svg {
-        stroke: #000;
+        stroke: #fcfafa;
       }
       
       .circular-text {
@@ -320,6 +355,30 @@
         animation: rotate 20s linear infinite;
       }
       
+      /* Special styling for the circular service card */
+      .circular-service-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+      }
+      
+      .circular-service-card .circular-text {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin: 1rem 0;
+        width: 180px;
+        height: 180px;
+      }
+      
+      .circular-service-card:hover .circular-text {
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+      }
+      
       @keyframes rotate {
         0% {
           transform: rotate(0deg);
@@ -328,7 +387,24 @@
           transform: rotate(360deg);
         }
       }
-      
+        
+        /* Extra enhancements for better responsiveness */
+        @media (max-width: 768px) {
+            .services-section {
+                grid-template-columns: 1fr;
+            }
+        
+            .service-card {
+                border-right: none;
+                border-bottom: 1px solid #333;
+            }
+        
+            .service-card:last-child {
+                border-bottom: none;
+            }
+        }
+        
+    
       /* Navigation Menu (from Image 2) */
       .main-container {
         display: flex;
@@ -530,6 +606,20 @@
         </div>
     </section>
     
+   
+    
+    <!-- Video Section -->
+    <section class="video-section">
+        <h2 class="section-title">Our Process</h2>
+        <div class="video-container">
+            <img src="/api/placeholder/1200/675" alt="Video thumbnail">
+            <div class="video-overlay">
+                <div class="play-button">
+                    Play
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Services Section -->
     <section class="services-section">
         <h2 class="section-title">Our Services</h2>
@@ -552,20 +642,6 @@
             </div>
         </div>
     </section>
-    
-    <!-- Video Section -->
-    <section class="video-section">
-        <h2 class="section-title">Our Process</h2>
-        <div class="video-container">
-            <img src="/api/placeholder/1200/675" alt="Video thumbnail">
-            <div class="video-overlay">
-                <div class="play-button">
-                    Play
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <!-- Projects Section -->
     <section class="projects-section">
         <h2 class="section-title">Featured Projects</h2>
@@ -594,39 +670,47 @@
         </div>
     </section>
      <!-- Services Section from Image 1 -->
-  <section class="services-section">
-    <div class="service-card">
-      <h3 class="service-title">Brand</h3>
-      <div class="arrow-circle">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </div>
-    <div class="service-card">
-      <h3 class="service-title">Product</h3>
-      <div class="arrow-circle">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </div>
-    <div class="service-card">
-      <h3 class="service-title">Motion</h3>
-      <div class="arrow-circle">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div>
-      <svg class="circular-text" viewBox="0 0 100 100">
-        <path id="curve" d="M50,90 a40,40 0 1,1 0.1,0" fill="transparent" />
-        <text width="100%" style="fill: #ffffff; font-size: 8px;">
-          <textPath xlink:href="#curve">WHAT WE DO - WHAT WE DO - WHAT WE DO - WHAT WE DO - </textPath>
-        </text>
-        <circle cx="50" cy="50" r="2" fill="white" />
-      </svg>
-    </div>
+     <section class="services-section">
+        <div class="service-card">
+          <h3 class="service-title">Brand</h3>
+          <div class="arrow-circle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="service-card">
+          <h3 class="service-title">Product</h3>
+          <div class="arrow-circle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="service-card">
+          <h3 class="service-title">Motion</h3>
+          <div class="arrow-circle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <!-- New service card with circular text -->
+        <div class="service-card circular-service-card">
+          <h3 class="service-title"></h3>
+          <svg class="circular-text" viewBox="0 0 100 100">
+            <path id="curve" d="M50,90 a40,40 0 1,1 0.1,0" fill="transparent" />
+            <text width="100%" style="fill: #ffffff; font-size: 8px;">
+              <textPath xlink:href="#curve">WHAT WE DO - WHAT WE DO - WHAT WE DO - WHAT WE DO - </textPath>
+            </text>
+            <circle cx="50" cy="50" r="2" fill="#c0ff00" />
+          </svg>
+          <div class="arrow-circle">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
   </section>
   
   <!-- Blog and Navigation Section from Image 2 -->
@@ -660,12 +744,28 @@
       </div>
     </div>
   </section>
+  <section class="circle-section">
+  <div class="text-left">Take a look at what</div>
+        
+  <!-- Line separating text from the circle -->
+  <div class="line"></div>
+  
+  <!-- The animated circle -->
+  <div class="circle" id="circle">All work</div>
+  
+  <!-- Line separating the circle from the bottom text -->
+  <div class="line"></div>
+  
+  <!-- Bottom text -->
+  <div class="text-right">we can do for you</div>
+</section>
     
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <h2 class="contact-cta">Ready to transform your digital presence?</h2>
         <a href="#" class="contact-button">Start a project</a>
     </section>
+    
     
     <!-- Footer -->
     <footer>
